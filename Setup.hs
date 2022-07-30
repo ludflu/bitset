@@ -13,7 +13,8 @@ import Distribution.Simple (UserHooks(..),
 import Distribution.Simple.LocalBuildInfo (LocalBuildInfo(..))
 import Distribution.Simple.Program (gccProgram, lookupProgram, runProgram)
 import Distribution.Simple.Setup (BuildFlags, CleanFlags)
-import Distribution.Simple.Utils (die, rawSystemStdout)
+import Distribution.Simple.Utils (dieNoVerbosity, rawSystemStdout)
+import Distribution.Simple.Utils (rawSystemStdout)
 import Distribution.System (OS(..), buildOS)
 import Distribution.Verbosity (silent)
 
@@ -38,7 +39,7 @@ main = defaultMainWithHooks
                     writeFile ("cbits" </> "GmpDerivedConstants.h") output
                     removeFile path
                     buildHook simpleUserHooks pkg_descr lbi userHooks flags
-            Nothing -> die "Failed to find GCC!"
+            Nothing -> dieNoVerbosity "Failed to find GCC!"
       where
         exeName :: FilePath
         exeName = case buildOS of

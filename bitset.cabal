@@ -1,5 +1,6 @@
-Name:                 bitset
-Version:              1.4.8
+cabal-version:        2.4
+name:                 bitset
+version:              1.4.8
 Synopsis:             A space-efficient set data structure.
 Description:
   A /bit set/ is a compact data structure, which maintains a set of members
@@ -14,14 +15,20 @@ Author:               Sergei Lebedev <superbobry@gmail.com>
 Maintainer:           superbobry@gmail.com
 Bug-reports:          http://github.com/lambda-llama/bitset/issues
 Stability:            Experimental
-Cabal-Version:        >= 1.12
 Build-type:           Custom
 Tested-with:          GHC == 7.4.1, GHC == 7.6.3, GHC == 7.8.4
 Extra-Source-Files:   bin/mkDerivedGmpConstants.c, include/bitset.h
 
+custom-setup
+  setup-depends:
+    base  ^>=4.14.3.0,
+    Cabal >= 2.4,
+    directory,
+    filepath
+
 Source-repository head
   Type:     git
-  Location: https://github.com/lambda-llama/bitset
+  Location: https://github.com/ludflu/bitset
 
 Library
   Hs-source-dirs:     src
@@ -42,7 +49,8 @@ Library
   else
     Extra-libraries:  gmp
 
-  Build-depends:      base                       >= 4.4.0 && < 4.8
+--  Build-depends:      base                       >= 4.4.0 && < 4.8
+  Build-depends:      base                       ^>=4.14.3.0
                     , deepseq
                     , integer-gmp
                     , ghc-prim
